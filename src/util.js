@@ -1,5 +1,5 @@
 /** Global Parameters Object */
-const params = { };
+const params = { blockSize: 133 };
 
 /**
  * @param {Number} n
