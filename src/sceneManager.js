@@ -7,10 +7,12 @@ class SceneManager {
 
     loadLevel(level) {
         if (level==1) {
-            levelOne.terrain.forEach(t => {
-                let terrain = new Terrain(this.game, t.x, t.y, "grass");
-                this.game.addEntity(terrain);
-            });
+            let tilemap = levelOne.terrain;
+            for (let i=levelOne.terrain.length-1; i>=0; i--) {
+                let tile = new Terrain(this.game, tilemap[i].x, tilemap[i].y, "grass");
+                this.game.addEntity(tile);
+                console.log('adding ' + tile);
+            }
         }
     }
 }

@@ -2,7 +2,7 @@ class Terrain {
     constructor(game, x, y, type) {
 
         // type will determine the starting x position on the spritesheet
-        this.type = selectType(type);
+        this.type = this.selectType(type);
 
         this.game = game;
         this.x = x;
@@ -13,6 +13,7 @@ class Terrain {
         this.midX = params.blockSize/2 + this.x;
         this.midY = (params.blockSize*0.77)/2 + this.y;
 
+        this.spritesheet = "./assets/spritesheet_nature-blocks.png";
 
     };
 
@@ -27,24 +28,24 @@ class Terrain {
                 else return 6;
                 break;
             case "grass":
-                let rand = Math.floor(Math.random() * (8) + 1);
-                if (rand==1) return 563;
-                else if (rand==2) return 703;
-                else if (rand==3) return 843;
-                else if (rand==4) return 983;
-                else if (rand==5) return 1123;
-                else if (rand==6) return 1263;
-                else if (rand==7) return 1543;
-                else if (rand==8) return 1684;
-                else if (rand==9) return 1823;
+                let rand2 = Math.floor(Math.random() * (8) + 1);
+                if (rand2==1) return 563;
+                else if (rand2==2) return 703;
+                else if (rand2==3) return 843;
+                else if (rand2==4) return 983;
+                else if (rand2==5) return 1123;
+                else if (rand2==6) return 1263;
+                else if (rand2==7) return 1543;
+                else if (rand2==8) return 1684;
+                else if (rand2==9) return 1823;
                 else return 563;
                 break;
             case "stone":
-                let rand = Math.floor(Math.random() * (3) + 1);
-                if (rand==1) return 2100;
-                else if (rand==2) return 2238;
-                else if (rand==3) return 2376;
-                else if (rand==4) return 2514;
+                let rand3 = Math.floor(Math.random() * (3) + 1);
+                if (rand3==1) return 2100;
+                else if (rand3==2) return 2238;
+                else if (rand3==3) return 2376;
+                else if (rand3==4) return 2514;
                 else return 2238;
                 break;
         }
@@ -53,4 +54,8 @@ class Terrain {
     draw(ctx) {
         ctx.drawImage(ASSET_MANAGER.getAsset(this.spritesheet), this.type, 0, params.blockSize, params.blockSize, this.x, this.y, params.blockSize, params.blockSize);
     }
+
+    update() {
+
+    };
 };
