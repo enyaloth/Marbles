@@ -7,13 +7,18 @@ class Terrain {
         this.game = game;
         this.x = x;
         this.y = y;
+        this.x_span = this.x + params.blockSize;
+        this.y_span = this.y + params.blockSize*0.7;
         this.scale = 1;
 
         // track the midpoint of each terrain block for entity placement
         this.midX = params.blockSize/2 + this.x;
         this.midY = (params.blockSize*0.77)/2 + this.y;
 
-        this.spritesheet = "./assets/spritesheet_nature-blocks.png";
+        this.spritesheet = "./assets/spritesheet2.png";
+
+        this.glow = false;
+        this.glow_x = 2653;
 
     };
 
@@ -53,9 +58,23 @@ class Terrain {
 
     draw(ctx) {
         ctx.drawImage(ASSET_MANAGER.getAsset(this.spritesheet), this.type, 0, params.blockSize, params.blockSize, this.x, this.y, params.blockSize, params.blockSize);
+        if (this.glow) {
+            ctx.drawImage(ASSET_MANAGER.getAsset(this.spritesheet), this.glow_x, 0, params.blockSize, params.blockSize, this.x, this.y, params.blockSize, params.blockSize);
+        }
     }
 
     update() {
-
+        let mousePoint = this.game.mouse;
+        
+        if(this.game.mouse != null){ 
+            
+            if (Math.abs(mousePoint.x - this.midX) < params.blockSize/3.5 && Math.abs(mousePoint.y - this.midY) < params.blockSize*0.7/3.5) {
+                console.log("{ mousePoint.x: " + mousePoint.x + ", mousePoint.y: " + mousePoint.y + ", { midX: " + this.midX + ", midY: " + this.midY + " }");
+                console.log("x diff: " + Math.abs(mousePoint.x - this.midX) + " y diff: " + Math.abs(mousePoint.y - this.midY));
+                this.glow = true;
+            }
+            else this.glow = false;
+        }
+        
     };
 };

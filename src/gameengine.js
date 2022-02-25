@@ -37,17 +37,17 @@ class GameEngine {
     };
 
     startInput() {
-        const getXandY = e => ({
-            x: e.clientX - this.ctx.canvas.getBoundingClientRect().left,
-            y: e.clientY - this.ctx.canvas.getBoundingClientRect().top
-        });
+        var that = this;
+
+        var getXandY = function (e) {
+            var x = e.clientX - that.ctx.canvas.getBoundingClientRect().left;
+            var y = e.clientY - that.ctx.canvas.getBoundingClientRect().top;
+            return { x: x, y: y, radius: 0 };
+        }
         
-        this.ctx.canvas.addEventListener("mousemove", e => {
-            if (this.options.debugging) {
-                console.log("MOUSE_MOVE", getXandY(e));
-            }
-            this.mouse = getXandY(e);
-        });
+        this.ctx.canvas.addEventListener("mousemove", function (e) {
+            that.mouse = getXandY(e);
+        }, false);
 
         this.ctx.canvas.addEventListener("click", e => {
             if (this.options.debugging) {
